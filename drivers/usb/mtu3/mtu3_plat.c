@@ -430,7 +430,6 @@ static int mtu3_probe(struct platform_device *pdev)
 		goto comm_exit;
 	}
 
-	device_enable_async_suspend(dev);
 	pm_runtime_mark_last_busy(dev);
 	pm_runtime_put_autosuspend(dev);
 	pm_runtime_forbid(dev);

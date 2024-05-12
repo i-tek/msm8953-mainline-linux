@@ -1147,7 +1147,6 @@ static int usb_serial_probe(struct usb_interface *interface,
 		port = serial->port[i];
 		dev_set_name(&port->dev, "ttyUSB%d", port->minor);
 		dev_dbg(ddev, "registering %s\n", dev_name(&port->dev));
-		device_enable_async_suspend(&port->dev);
 
 		retval = device_add(&port->dev);
 		if (retval)

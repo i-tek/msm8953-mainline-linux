@@ -225,7 +225,6 @@ static int xhci_histb_probe(struct platform_device *pdev)
 
 	pm_runtime_enable(dev);
 	pm_runtime_get_sync(dev);
-	device_enable_async_suspend(dev);
 
 	/* Initialize dma_mask and coherent_dma_mask to 32-bits */
 	ret = dma_set_mask_and_coherent(dev, DMA_BIT_MASK(32));
@@ -283,7 +282,6 @@ static int xhci_histb_probe(struct platform_device *pdev)
 	if (ret)
 		goto dealloc_usb2_hcd;
 
-	device_enable_async_suspend(dev);
 	pm_runtime_put_noidle(dev);
 
 	/*

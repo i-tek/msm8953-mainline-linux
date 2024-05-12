@@ -372,8 +372,6 @@ static int dw_i2c_plat_probe(struct platform_device *pdev)
 					DPM_FLAG_SMART_SUSPEND);
 	}
 
-	device_enable_async_suspend(&pdev->dev);
-
 	/* The code below assumes runtime PM to be disabled. */
 	WARN_ON(pm_runtime_enabled(&pdev->dev));
 

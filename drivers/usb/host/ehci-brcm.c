@@ -176,7 +176,6 @@ static int ehci_brcm_probe(struct platform_device *pdev)
 		goto err_clk;
 
 	device_wakeup_enable(hcd->self.controller);
-	device_enable_async_suspend(hcd->self.controller);
 
 	return 0;
 

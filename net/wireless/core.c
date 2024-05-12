@@ -539,7 +539,6 @@ use_default_name:
 	device_initialize(&rdev->wiphy.dev);
 	rdev->wiphy.dev.class = &ieee80211_class;
 	rdev->wiphy.dev.platform_data = rdev;
-	device_enable_async_suspend(&rdev->wiphy.dev);
 
 	INIT_WORK(&rdev->destroy_work, cfg80211_destroy_iface_wk);
 	wiphy_work_init(&rdev->sched_scan_stop_wk, cfg80211_sched_scan_stop_wk);

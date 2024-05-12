@@ -725,7 +725,6 @@ static int stmfts_probe(struct i2c_client *client)
 	}
 
 	pm_runtime_enable(&client->dev);
-	device_enable_async_suspend(&client->dev);
 
 	return 0;
 }

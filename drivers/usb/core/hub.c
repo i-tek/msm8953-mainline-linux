@@ -2602,8 +2602,6 @@ int usb_new_device(struct usb_device *udev)
 		add_device_randomness(udev->manufacturer,
 				      strlen(udev->manufacturer));
 
-	device_enable_async_suspend(&udev->dev);
-
 	/* check whether the hub or firmware marks this port as non-removable */
 	set_usb_port_removable(udev);
 

@@ -325,7 +325,6 @@ int xhci_plat_probe(struct platform_device *pdev, struct device *sysdev, const s
 			goto put_usb3_hcd;
 	}
 
-	device_enable_async_suspend(&pdev->dev);
 	pm_runtime_put_noidle(&pdev->dev);
 
 	/*

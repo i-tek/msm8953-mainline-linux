@@ -761,7 +761,6 @@ int usb_hub_create_port_device(struct usb_hub *hub, int port1)
 	pm_runtime_set_active(&port_dev->dev);
 	pm_runtime_get_noresume(&port_dev->dev);
 	pm_runtime_enable(&port_dev->dev);
-	device_enable_async_suspend(&port_dev->dev);
 
 	/*
 	 * Keep hidden the ability to enable port-poweroff if the hub

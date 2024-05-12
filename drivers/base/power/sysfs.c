@@ -597,7 +597,7 @@ static ssize_t async_store(struct device *dev, struct device_attribute *attr,
 			   const char *buf, size_t n)
 {
 	if (sysfs_streq(buf, _enabled))
-		device_enable_async_suspend(dev);
+		device_disable_async_suspend(dev);
 	else if (sysfs_streq(buf, _disabled))
 		device_disable_async_suspend(dev);
 	else

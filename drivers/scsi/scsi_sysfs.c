@@ -656,7 +656,7 @@ static int scsi_sdev_check_buf_bit(const char *buf)
 			return 1;
 		else if (buf[0] == '0')
 			return 0;
-		else 
+		else
 			return -EINVAL;
 	} else
 		return -EINVAL;
@@ -881,7 +881,7 @@ store_queue_type_field(struct device *dev, struct device_attribute *attr,
 
 	if (!sdev->tagged_supported)
 		return -EINVAL;
-		
+
 	sdev_printk(KERN_INFO, sdev,
 		    "ignoring write to deprecated queue_type attribute");
 	return count;
@@ -1379,7 +1379,6 @@ static int scsi_target_add(struct scsi_target *starget)
 
 	pm_runtime_set_active(&starget->dev);
 	pm_runtime_enable(&starget->dev);
-	device_enable_async_suspend(&starget->dev);
 
 	return 0;
 }
@@ -1402,7 +1401,6 @@ int scsi_sysfs_add_sdev(struct scsi_device *sdev)
 
 	transport_configure_device(&starget->dev);
 
-	device_enable_async_suspend(&sdev->sdev_gendev);
 	scsi_autopm_get_target(starget);
 	pm_runtime_set_active(&sdev->sdev_gendev);
 	if (!sdev->rpm_autosuspend)
@@ -1421,7 +1419,6 @@ int scsi_sysfs_add_sdev(struct scsi_device *sdev)
 		return error;
 	}
 
-	device_enable_async_suspend(&sdev->sdev_dev);
 	error = device_add(&sdev->sdev_dev);
 	if (error) {
 		sdev_printk(KERN_INFO, sdev,
@@ -1642,7 +1639,6 @@ void scsi_sysfs_device_initialize(struct scsi_device *sdev)
 	device_initialize(&sdev->sdev_gendev);
 	sdev->sdev_gendev.bus = &scsi_bus_type;
 	sdev->sdev_gendev.type = &scsi_dev_type;
-	scsi_enable_async_suspend(&sdev->sdev_gendev);
 	dev_set_name(&sdev->sdev_gendev, "%d:%d:%d:%llu",
 		     sdev->host->host_no, sdev->channel, sdev->id, sdev->lun);
 	sdev->sdev_gendev.groups = hostt->sdev_groups;

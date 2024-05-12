@@ -1221,7 +1221,6 @@ int i2c_hid_core_probe(struct i2c_client *client, struct i2chid_ops *ops,
 	ret = i2c_hid_alloc_buffers(ihid, HID_MIN_BUFFER_SIZE);
 	if (ret < 0)
 		return ret;
-	device_enable_async_suspend(&client->dev);
 
 	hid = hid_allocate_device();
 	if (IS_ERR(hid)) {

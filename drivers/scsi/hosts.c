@@ -11,10 +11,10 @@
  *  <drew@colorado.edu>
  *
  *  Jiffies wrap fixes (host->resetting), 3 Dec 1998 Andrea Arcangeli
- *  Added QLOGIC QLA1280 SCSI controller kernel host support. 
+ *  Added QLOGIC QLA1280 SCSI controller kernel host support.
  *     August 4, 1999 Fred Lewis, Intel DuPont
  *
- *  Updated to reflect the new initialization scheme for the higher 
+ *  Updated to reflect the new initialization scheme for the higher
  *  level of scsi drivers (sd/sr/st)
  *  September 17, 2000 Torben Mathiasen <tmm@image.dk>
  *
@@ -213,7 +213,7 @@ EXPORT_SYMBOL(scsi_remove_host);
  * virtualised host environments, so use the simpler scsi_add_host()
  * function instead.
  *
- * Return value: 
+ * Return value:
  * 	0 on success / != 0 for error
  **/
 int scsi_add_host_with_dma(struct Scsi_Host *shost, struct device *dev,
@@ -266,7 +266,6 @@ int scsi_add_host_with_dma(struct Scsi_Host *shost, struct device *dev,
 	pm_runtime_get_noresume(&shost->shost_gendev);
 	pm_runtime_set_active(&shost->shost_gendev);
 	pm_runtime_enable(&shost->shost_gendev);
-	device_enable_async_suspend(&shost->shost_gendev);
 
 	error = device_add(&shost->shost_gendev);
 	if (error)
@@ -274,8 +273,6 @@ int scsi_add_host_with_dma(struct Scsi_Host *shost, struct device *dev,
 
 	scsi_host_set_state(shost, SHOST_RUNNING);
 	get_device(shost->shost_gendev.parent);
-
-	device_enable_async_suspend(&shost->shost_dev);
 
 	get_device(&shost->shost_gendev);
 	error = device_add(&shost->shost_dev);
@@ -326,7 +323,6 @@ int scsi_add_host_with_dma(struct Scsi_Host *shost, struct device *dev,
 	put_device(&shost->shost_dev);
 	device_del(&shost->shost_gendev);
  out_disable_runtime_pm:
-	device_disable_async_suspend(&shost->shost_gendev);
 	pm_runtime_disable(&shost->shost_gendev);
 	pm_runtime_set_suspended(&shost->shost_gendev);
 	pm_runtime_put_noidle(&shost->shost_gendev);
@@ -493,7 +489,6 @@ struct Scsi_Host *scsi_host_alloc(const struct scsi_host_template *sht, int priv
 	dev_set_name(&shost->shost_gendev, "host%d", shost->host_no);
 	shost->shost_gendev.bus = &scsi_bus_type;
 	shost->shost_gendev.type = &scsi_host_type;
-	scsi_enable_async_suspend(&shost->shost_gendev);
 
 	device_initialize(&shost->shost_dev);
 	shost->shost_dev.parent = &shost->shost_gendev;
